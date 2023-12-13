@@ -8,6 +8,7 @@ export const Lurl = "http://localhost:8080/api/";
 
 const apiUrl = {
   getCanvas: "canvas/get",
+  getPainting: "painting/get",
 };
 
 export const getCanvasApi = async () => {
@@ -19,6 +20,17 @@ export const getCanvasApi = async () => {
       icon: "error",
       title: "Something went wrong",
     });
+    return {
+      error: err,
+      message: err.response.data.message,
+    };
+  }
+};
+export const getPaintingApi = async () => {
+  try {
+    const res = await axios.get(url + apiUrl.getPainting);
+    return res.data;
+  } catch (err) {
     return {
       error: err,
       message: err.response.data.message,
