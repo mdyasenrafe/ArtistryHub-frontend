@@ -1,7 +1,7 @@
 import { Container } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getpaintingsApi, getPaintingApi } from "../api/api";
+import { getPaintingApi } from "../api/api";
 import { Toast } from "../components/common/Toast";
 import Spinner from "../components/common/Spinner";
 
