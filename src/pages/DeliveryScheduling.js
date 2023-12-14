@@ -1,5 +1,5 @@
 import { Container } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -8,12 +8,13 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Toast } from "../components/common/Toast";
 import { useNavigate } from "react-router-dom";
 
-export default function DeliveryScheduling({
-  setStep,
-  orderData,
-  setOrderData,
-}) {
+export default function DeliveryScheduling() {
+  const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState(dayjs());
+
+  useEffect(() => {
+    console.log(selectedDate);
+  }, [selectedDate]);
 
   const handleContinue = () => {
     if (!selectedDate) {
@@ -23,23 +24,40 @@ export default function DeliveryScheduling({
       });
       return;
     }
-    // navigate("/image-uploads");
-    setStep(3);
     const date = selectedDate.format("YYYY-MM-DD");
-    setOrderData({
-      ...orderData,
-      deliveryDate: date,
-    });
+    const orderData = localStorage.getItem("orderData");
+    if (orderData) {
+      const data = JSON.parse(orderData);
+      data.deliveryDate = date;
+      localStorage.setItem("orderData", JSON.stringify(data));
+    }
+    navigate("/image-uploads");
   };
 
   const handleDateChange = (newValue) => {
     setSelectedDate(newValue);
   };
 
+  useEffect(() => {
+    const orderData = localStorage.getItem("orderData");
+    if (orderData) {
+      const data = JSON.parse(orderData);
+      if (data.deliveryDate) {
+        setSelectedDate(dayjs(data.deliveryDate));
+      } else if (!data?.painting) {
+        navigate("/style-options");
+      } else if (!data?.canvas) {
+        navigate("/canvas-selection");
+      }
+    } else {
+      navigate("/canvas-selection");
+    }
+  }, []);
+
   return (
     <Container>
       <div className="rounded-lg bg-white mt-6 border-lightgray">
-        <div className="py-4 border-b">
+        <div className="p-4 border-b">
           <h1 className="font-bold text-2xl text-center">
             Choose a Delivery Date
           </h1>

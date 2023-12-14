@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "@mui/material";
 import { uploadImageApi } from "../api/api";
 import { Toast } from "../components/common/Toast";
-import { useNavigate } from "react-router-dom";
 import Spinner from "../components/common/Spinner";
+import { useNavigate } from "react-router-dom";
 
-export default function ImageUploads({ setStep, orderData, setOrderData }) {
+export default function ImageUploads() {
+  const navigate = useNavigate();
   let DemoImage = "https://i.ibb.co/sjZ57Dp/Group-1295.png";
   let camera = "https://i.ibb.co/yy0WSVg/Group-1098.png";
   const [selectedFile, setSelectedFile] = useState(null);
@@ -45,11 +46,13 @@ export default function ImageUploads({ setStep, orderData, setOrderData }) {
       return;
     } else {
       setLoading(false);
-      setStep(4);
-      setOrderData({
-        ...orderData,
-        image: res.secure_url,
-      });
+      const orderData = localStorage.getItem("orderData");
+      if (orderData) {
+        const data = JSON.parse(orderData);
+        data.image = res?.secure_url;
+        localStorage.setItem("orderData", JSON.stringify(data));
+      }
+      navigate("/order-review");
     }
   };
 
@@ -57,9 +60,28 @@ export default function ImageUploads({ setStep, orderData, setOrderData }) {
     const bannerInput = document.getElementById(id);
     bannerInput.click();
   };
+
+  useEffect(() => {
+    const orderData = localStorage.getItem("orderData");
+    if (orderData) {
+      const data = JSON.parse(orderData);
+      if (data?.image) {
+        setSelectedFile(data?.image);
+      } else if (!data?.deliveryDate) {
+        navigate("/delivery-scheduling");
+      } else if (!data?.painting) {
+        navigate("/style-options");
+      } else if (!data?.canvas) {
+        navigate("/canvas-selection");
+      }
+    } else {
+      navigate("/canvas-selection");
+    }
+  }, []);
+
   return (
     <Container>
-      <div className="rounded-lg bg-white mt-6 border-lightgray p-4">
+      <div className="rounded-lg bg-white mt-6 border-lightgray py-4">
         <div className="py-4 border-b">
           <h1 className="font-bold text-2xl text-center">Image Uploads</h1>
         </div>

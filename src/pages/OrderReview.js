@@ -1,5 +1,5 @@
 import { Container } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Spinner from "../components/common/Spinner";
 import { PostOrderApi } from "../api/api";
 import Swal from "sweetalert2";
@@ -7,9 +7,29 @@ import { Toast } from "../components/common/Toast";
 import { useNavigate } from "react-router-dom";
 import { getUniqueId, saveUniqueId } from "../utils/uniqueIdentifiers";
 
-export default function OrderReview({ orderData }) {
+export default function OrderReview() {
   const [isLoading, setIsLoading] = useState(false);
+  const [orderData, setOrderData] = useState({});
   const navigation = useNavigate();
+
+  useEffect(() => {
+    const orderData = localStorage.getItem("orderData");
+    if (orderData) {
+      const data = JSON.parse(orderData);
+      setOrderData(data);
+      if (!data?.image) {
+        navigation("/image-uploads");
+      } else if (!data?.deliveryDate) {
+        navigation("/delivery-scheduling");
+      } else if (!data?.painting) {
+        navigation("/style-options");
+      } else if (!data?.canvas) {
+        navigation("/canvas-selection");
+      }
+    } else {
+      navigation("/canvas-selection");
+    }
+  }, []);
 
   const submitOrder = async () => {
     setIsLoading(true);
@@ -29,12 +49,13 @@ export default function OrderReview({ orderData }) {
       setIsLoading(false);
       return;
     } else {
+      localStorage.removeItem("orderData");
       Swal.fire({
         title: "Order Placed",
         text: "Your order has been placed successfully",
         icon: "success",
       }).then(() => {
-        navigation("/admin-panel");
+        navigation("/thank-you");
       });
       setIsLoading(false);
     }

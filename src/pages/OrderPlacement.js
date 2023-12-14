@@ -26,7 +26,7 @@ export default function OrderPlacement() {
           <button
             className="h-[40px] md:h-[48px] w-full bg-[#3c7fff] hover:bg-indigo-800 rounded-lg text-white flex justify-center items-center"
             type="submit"
-            onClick={() => navigation("/select-style")}
+            onClick={() => navigation("/canvas-selection")}
           >
             Place Order
           </button>

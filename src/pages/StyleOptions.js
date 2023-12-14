@@ -4,11 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { getPaintingApi } from "../api/api";
 import { Toast } from "../components/common/Toast";
 import Spinner from "../components/common/Spinner";
+import { IoArrowBack } from "react-icons/io5";
 
-export default function StyleOptions({ setStep, orderData, setOrderData }) {
+export default function StyleOptions() {
   const [paintings, setPaintings] = useState([]);
   const [selectedPainting, setSelectedPainting] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchPainting();
@@ -34,19 +36,35 @@ export default function StyleOptions({ setStep, orderData, setOrderData }) {
         title: "Please select a paintings",
       });
     } else {
-      // navigation("/delivery-scheduling");
-      setStep(2);
-      setOrderData({
-        ...orderData,
-        painting: selectedPainting,
-      });
+      const orderData = localStorage.getItem("orderData");
+      if (orderData) {
+        const data = JSON.parse(orderData);
+        data.painting = selectedPainting;
+        localStorage.setItem("orderData", JSON.stringify(data));
+      }
+      navigate("/delivery-scheduling");
     }
   };
+
+  useEffect(() => {
+    const orderData = localStorage.getItem("orderData");
+    console.log(orderData);
+    if (orderData) {
+      const data = JSON.parse(orderData);
+      if (data?.painting) {
+        setSelectedPainting(data?.painting);
+      } else if (data?.canvas == "") {
+        navigate("/canvas-selection");
+      }
+    } else {
+      navigate("/canvas-selection");
+    }
+  }, []);
 
   return (
     <Container>
       <div className="rounded-lg bg-white mt-6 border-lightgray">
-        <div className="py-4 border-b">
+        <div className="p-4 border-b">
           <h1 className="font-bold text-2xl text-center">Choose a painting</h1>
         </div>
         <div className="m-5">
