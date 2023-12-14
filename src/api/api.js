@@ -11,6 +11,7 @@ const apiUrl = {
   getPainting: "painting/get",
   uploadImage: "uploadImage",
   postOrder: "order/create",
+  getOrders: "order/get",
 };
 
 export const getCanvasApi = async () => {
@@ -70,6 +71,18 @@ export const getIpApi = async () => {
     return {
       error: err,
       message: err.response.data.message,
+    };
+  }
+};
+export const getOrdersApi = async (ip) => {
+  try {
+    const getOrderUrl = `${url}${apiUrl.getOrders}?ip=${ip}`;
+    const res = await axios.get(getOrderUrl);
+    return res.data;
+  } catch (err) {
+    return {
+      error: err,
+      message: err?.response?.data?.message,
     };
   }
 };
