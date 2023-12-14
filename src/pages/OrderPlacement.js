@@ -1,12 +1,14 @@
 import React from "react";
 import { Container } from "@mui/material";
 import { Navigate, useNavigate } from "react-router-dom";
+import Navbar from "../components/layout/Navbar";
 
 export default function OrderPlacement() {
   const navigation = useNavigate();
 
   return (
     <Container>
+      <Navbar />
       <div className="rounded-lg bg-white mt-6 border-lightgray">
         <div className="py-4 border-b">
           <h1 className="font-bold text-2xl text-center">Order Placement</h1>

@@ -14,7 +14,7 @@ export default function ImageUploads({ setStep, orderData, setOrderData }) {
   const handleChange = (e) => {
     if (e.target.files[0]) {
       let size = e.target.files[0].size / 1024 / 1024;
-      if (size > 3) {
+      if (size > 1) {
         Toast.fire({
           icon: "error",
           title: "File size is too large",

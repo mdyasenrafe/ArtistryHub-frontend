@@ -1,10 +1,15 @@
 import React from "react";
 
-export default function Spinner() {
+export default function Spinner({
+  color = "#3c7fff",
+  size = "20px",
+  className = "",
+}) {
   return (
     <div role="status " className="flex items-center">
       <svg
-        className="inline mr-2 w-[20px] h-[20px] text-[#3c7fff] animate-spin  fill-[#3c7fff]"
+        className={`inline mr-2 w-[20px] h-[20px] 
+      text-[${color}]  first-letter:animate-spin  fill-[${color}] ${className}`}
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
