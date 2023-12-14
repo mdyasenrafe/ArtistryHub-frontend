@@ -8,7 +8,11 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Toast } from "../components/common/Toast";
 import { useNavigate } from "react-router-dom";
 
-export default function DeliveryScheduling() {
+export default function DeliveryScheduling({
+  setStep,
+  orderData,
+  setOrderData,
+}) {
   const [selectedDate, setSelectedDate] = useState(dayjs());
   const navigate = useNavigate();
 
@@ -20,7 +24,13 @@ export default function DeliveryScheduling() {
       });
       return;
     }
-    navigate("/image-uploads");
+    // navigate("/image-uploads");
+    setStep(3);
+    const date = selectedDate.format("YYYY-MM-DD");
+    setOrderData({
+      ...orderData,
+      deliveryDate: date,
+    });
   };
 
   const handleDateChange = (newValue) => {

@@ -5,7 +5,7 @@ import { getPaintingApi } from "../api/api";
 import { Toast } from "../components/common/Toast";
 import Spinner from "../components/common/Spinner";
 
-export default function StyleOptions() {
+export default function StyleOptions({ setStep, orderData, setOrderData }) {
   const navigation = useNavigate();
   const [paintings, setPaintings] = useState([]);
   const [selectedPainting, setSelectedPainting] = useState("");
@@ -35,7 +35,12 @@ export default function StyleOptions() {
         title: "Please select a paintings",
       });
     } else {
-      navigation("/delivery-scheduling");
+      // navigation("/delivery-scheduling");
+      setStep(2);
+      setOrderData({
+        ...orderData,
+        painting: selectedPainting,
+      });
     }
   };
 
@@ -55,6 +60,7 @@ export default function StyleOptions() {
               <div className="my-10">
                 {paintings.map((item) => (
                   <div
+                    key={item.value}
                     className="flex mb-2 items-center cursor-pointer"
                     onClick={() => setSelectedPainting(item.value)}
                   >

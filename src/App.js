@@ -19,24 +19,8 @@ const router = createBrowserRouter([
     element: <OrderPlacement />,
   },
   {
-    path: "/canvas-selection",
+    path: "select-style",
     element: <CanvasSelection />,
-  },
-  {
-    path: "/style-options",
-    element: <StyleOptions />,
-  },
-  {
-    path: "/delivery-scheduling",
-    element: <DeliveryScheduling />,
-  },
-  {
-    path: "/image-uploads",
-    element: <ImageUploads />,
-  },
-  {
-    path: "/order-review",
-    element: <OrderReview />,
   },
   {
     path: "/admin-panel",
