@@ -38,9 +38,9 @@ export const getPaintingApi = async () => {
     };
   }
 };
-export const uploadImageApi = async () => {
+export const uploadImageApi = async (body) => {
   try {
-    const res = await axios.get(url + apiUrl.uploadImage);
+    const res = await axios.post(url + apiUrl.uploadImage, body);
     return res.data;
   } catch (err) {
     return {
