@@ -1,8 +1,7 @@
 import { Container } from "@mui/material";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Spinner from "../components/common/Spinner";
-import { PostOrderApi, getIpApi } from "../api/api";
+import { PostOrderApi } from "../api/api";
 import Swal from "sweetalert2";
 import { Toast } from "../components/common/Toast";
 import { useNavigate } from "react-router-dom";

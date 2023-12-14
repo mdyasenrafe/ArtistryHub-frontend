@@ -6,13 +6,11 @@ import { Toast } from "../components/common/Toast";
 import Spinner from "../components/common/Spinner";
 import StyleOptions from "./StyleOptions";
 import DeliveryScheduling from "./DeliveryScheduling";
-import OrderPlacement from "./OrderPlacement";
 import ImageUploads from "./ImageUploads";
 import OrderReview from "./OrderReview";
 import Navbar from "../components/layout/Navbar";
 
 export default function CanvasSelection() {
-  const navigation = useNavigate();
   const [canvas, setCanvas] = useState([]);
   const [selectedCanvas, setSelectedCanvas] = useState("");
   const [isLoading, setIsLoading] = useState(true);

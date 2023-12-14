@@ -13,7 +13,7 @@ import Typography from "@mui/material/Typography";
 import Toolbar from "@mui/material/Toolbar";
 import { CiMenuBurger } from "react-icons/ci";
 import { GrProjects } from "react-icons/gr";
-import { getIpApi, getOrdersApi } from "../api/api";
+import { getOrdersApi } from "../api/api";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";

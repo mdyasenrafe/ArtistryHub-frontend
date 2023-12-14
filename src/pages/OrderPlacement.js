@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Container } from "@mui/material";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/layout/Navbar";
 import { getUniqueId, saveUniqueId } from "../utils/uniqueIdentifiers";
 

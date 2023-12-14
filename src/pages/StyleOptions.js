@@ -6,7 +6,6 @@ import { Toast } from "../components/common/Toast";
 import Spinner from "../components/common/Spinner";
 
 export default function StyleOptions({ setStep, orderData, setOrderData }) {
-  const navigation = useNavigate();
   const [paintings, setPaintings] = useState([]);
   const [selectedPainting, setSelectedPainting] = useState("");
   const [isLoading, setIsLoading] = useState(true);
