@@ -85,3 +85,36 @@ button {
   font-weight: 500;
   /* height: 16px; */
 }
+
+.modal_view {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  border: 1px solid rgb(204, 204, 204);
+  background: white;
+  overflow-x: visible;
+  overflow-y: auto;
+  border-radius: 12px;
+  outline: none;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  max-width: 95%;
+  height: calc(100% - 3.5rem) !important;
+}
+
+.center_view {
+  position: fixed;
+  inset: 0px;
+  background-color: rgba(77, 77, 77, 0.5);
+  z-index: 100;
+}
+
+.edit_modal_view {
+  width: 60%;
+  height: auto !important;
+}
+
+@media (max-width: 768px) {
+  .edit_modal_view {
+    width: 90%;
+  }
+}

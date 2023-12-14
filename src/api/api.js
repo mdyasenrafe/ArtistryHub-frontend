@@ -4,7 +4,7 @@ import { Toast } from "../components/common/Toast";
 // https://artistry-hub.onrender.com
 
 export const url = "https://artistry-hub.onrender.com/api/";
-// export const Lurl = "http://localhost:8080/api/";
+export const Lurl = "http://localhost:8080/api/";
 
 const apiUrl = {
   getCanvas: "canvas/get",
@@ -74,9 +74,9 @@ export const getIpApi = async () => {
     };
   }
 };
-export const getOrdersApi = async (ip) => {
+export const getOrdersApi = async (uniqueId) => {
   try {
-    const getOrderUrl = `${url}${apiUrl.getOrders}?ip=${ip}`;
+    const getOrderUrl = `${url}${apiUrl.getOrders}?uniqueId=${uniqueId}`;
     const res = await axios.get(getOrderUrl);
     return res.data;
   } catch (err) {

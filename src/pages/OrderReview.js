@@ -6,29 +6,22 @@ import { PostOrderApi, getIpApi } from "../api/api";
 import Swal from "sweetalert2";
 import { Toast } from "../components/common/Toast";
 import { useNavigate } from "react-router-dom";
+import { getUniqueId, saveUniqueId } from "../utils/uniqueIdentifiers";
 
 export default function OrderReview({ orderData }) {
-  const [ip, setIp] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigate();
 
-  useEffect(() => {
-    fetchIpAddress();
-  }, []);
-
-  const fetchIpAddress = async () => {
-    const response = await getIpApi();
-    console.log(response);
-    setIp(response?.ip);
-  };
-
   const submitOrder = async () => {
     setIsLoading(true);
-    const bodyData = {
-      ...orderData,
-      ip: ip,
-    };
-    const res = await PostOrderApi(bodyData);
+    let id = getUniqueId();
+    if (id) {
+    } else {
+      id = saveUniqueId();
+    }
+    orderData["uniqueId"] = id;
+    console.log(orderData);
+    const res = await PostOrderApi(orderData);
     if (res.error) {
       Toast.fire({
         icon: "error",

@@ -62,18 +62,18 @@ export default function StyleOptions({ setStep, orderData, setOrderData }) {
                   <div
                     key={item.value}
                     className="flex mb-2 items-center cursor-pointer"
-                    onClick={() => setSelectedPainting(item.value)}
+                    onClick={() => setSelectedPainting(item.label)}
                   >
                     <div
                       className={`flex items-center w-6 h-6 border justify-center mr-2 rounded-full ${
-                        selectedPainting === item.value
+                        selectedPainting === item.label
                           ? "border-[#3c7fff]"
                           : "border-gray-300"
                       }`}
                     >
                       <div
                         className={`${
-                          selectedPainting === item.value
+                          selectedPainting === item.label
                             ? "bg-[#3c7fff]"
                             : "bg-white"
                         } border border-gray-300 w-4 h-4 rounded-full flex justify-center items-center`}
