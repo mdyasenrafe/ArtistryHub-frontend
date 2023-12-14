@@ -5,15 +5,21 @@ import DeliveryScheduling from "./pages/DeliveryScheduling";
 import ImageUploads from "./pages/ImageUploads";
 import OrderPlacement from "./pages/OrderPlacement";
 import OrderReview from "./pages/OrderReview";
+import Signin from "./pages/Signin";
 import StyleOptions from "./pages/StyleOptions";
 import ThankYou from "./pages/ThankYou";
 import "./style/style.css";
 import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
+import PrivateRoute from "./utils/PrivateRoute";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <OrderPlacement />,
+  },
+  {
+    path: "/signin",
+    element: <Signin />,
   },
   {
     path: "/order-placement",
@@ -41,7 +47,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin-panel",
-    element: <AdminPanel />,
+    element: (
+      <PrivateRoute>
+        <AdminPanel />
+      </PrivateRoute>
+    ),
   },
   {
     path: "/thank-you",

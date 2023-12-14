@@ -118,3 +118,12 @@ button {
     width: 90%;
   }
 }
+
+@layer components {
+  label {
+    @apply block mb-3 text-[16px] font-[700] text-gray-700;
+  }
+  .input {
+    @apply py-3 appearance-none block w-full rounded-[8px] px-4 leading-tight mb-3 h-[48px] text-[14px] duration-500 border border-[#e1e1e1];
+  }
+}
