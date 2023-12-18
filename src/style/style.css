@@ -118,6 +118,19 @@ button {
     width: 90%;
   }
 }
+.editor_class_1 {
+  height: 150px !important;
+  overflow-x: hidden !important;
+  padding-left: 8px;
+}
+.description ul li {
+  list-style: disc !important;
+  margin-left: 20px !important;
+}
+.description ol li {
+  list-style: disc !important;
+  margin-left: 20px !important;
+}
 
 @layer components {
   label {

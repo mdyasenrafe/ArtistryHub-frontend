@@ -12,6 +12,8 @@ const apiUrl = {
   uploadImage: "uploadImage",
   postOrder: "order/create",
   getOrders: "order/get",
+  createPage: "page/create",
+  getPages: "page/get",
 };
 
 export const getCanvasApi = async () => {
@@ -62,10 +64,22 @@ export const PostOrderApi = async (body) => {
     };
   }
 };
-export const getIpApi = async () => {
+export const getOrdersApi = async (uniqueId) => {
   try {
-    const url = `https://api.ipify.org/?format=json`;
-    const res = await axios.get(url);
+    const getOrderUrl = `${url}${apiUrl.getOrders}?uniqueId=${uniqueId}`;
+    const res = await axios.get(getOrderUrl);
+    return res.data;
+  } catch (err) {
+    return {
+      error: err,
+      message: err?.response?.data?.message,
+    };
+  }
+};
+
+export const CreatePageApi = async (body) => {
+  try {
+    const res = await axios.post(url + apiUrl.createPage, body);
     return res.data;
   } catch (err) {
     return {
@@ -74,10 +88,10 @@ export const getIpApi = async () => {
     };
   }
 };
-export const getOrdersApi = async (uniqueId) => {
+export const getPagesApi = async () => {
   try {
-    const getOrderUrl = `${url}${apiUrl.getOrders}?uniqueId=${uniqueId}`;
-    const res = await axios.get(getOrderUrl);
+    const getPageUrl = `${url}${apiUrl.getPages}`;
+    const res = await axios.get(getPageUrl);
     return res.data;
   } catch (err) {
     return {
